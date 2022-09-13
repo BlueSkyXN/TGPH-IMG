@@ -18,7 +18,7 @@
 			}
             .container{
                 display:table;
-                height:100%;
+                height:80%;
             }
             .row{
                 display: table-cell;
@@ -34,10 +34,12 @@
             }
             .alert{
 				font-size: 13px;
+				display:block;
+				margin:0 auto;
 			}
             .upload-file{
                   position: relative;
-                  width: 230px;
+                  width: 300px;
                   left:0;
                   right:0;
                   margin:0 auto;
@@ -58,13 +60,13 @@
             }
             
             .upload-file:hover{ //简单的hover效果
-                  font-size: 15px;
+                  font-size: 55px;
                   border-color: rgb(39, 226, 81);
                 }
             
             .upload-file input[type='file']{
-                  height: 100%;
-                  width: 100%;
+                  height: 80%;
+                  width: 80%;
                   position: absolute; //设置为绝对定位，不会影响到其余元素
                   top: 0;
                   right: 0;
@@ -75,25 +77,27 @@
                 img{
                  width:auto;
                  height:auto;
-                 max-width:100%;
-                 max-height:100%;
+                 max-width:80%;
+                 max-height:80%;
                 }
 
         </style>
     </head>
 <body>
+    <h4 style="text-align:center;font-size:20px;">TGPH-IMG</h4>
+    <h5 style="text-align:center;font-size:15px;">请注意，目前一次只能上传一张图片</h5>
     <div class="container">
         <br>
-        <h4 style="text-align:center;font-size:20px;">TGPH-IMG</h4>
         <br>
         <form role="form" action="##" onsubmit="return false" method="post" enctype="multipart/form-data" id="uploadForm">
         <div class="upload-file">
-        <input type="file" class="input-file" name="file" accept="image/png, image/jpeg, image/jpg, image/gif">
+        <input type="file" multiple class="input-file" name="file" accept="image/png, image/jpeg, image/jpg, image/gif">
         <span class="tip">Choose Image 选择图片</span>
         </div>
         <br><div class="Result"></div>
         <textarea id="input"></textarea>
-        <button type="submit" name="submit" class="btn btn-primary btn-block" style="background: #4066ff;border:none;" onclick="submitdata()">Upload 上传</button>
+        <br>
+        <button type="submit" name="submit" class="btn btn-primary btn-block" style="background:#4066ff;text-align:center;width:150px;height:30px;display:block;margin:0 auto" onclick="submitdata()">Upload 上传</button>
         </form><br>
         <p align="center"><a href="https://telegra.ph" target="_Blank">Telegraph</a> | <a href="https://github.com/BlueSkyXN/TGPH-IMG" target="_Blank">GITHUB</a></p>
         
@@ -106,7 +110,7 @@
         file = filelist.item(0)
         var tip = document.querySelector('.tip');
         fileInput.addEventListener('change',function(e){ 
-            tip.textContent = 'Selected ' + this.files.length + ' Photo';
+            tip.textContent = 'Selected ' + this.files.length + ' IMG' + '  选择了 ' + this.files.length + ' 张图';
             //tip.textContent = this.files[0].name;
         })
         function CopyUrl() {
@@ -133,7 +137,8 @@
                     if(result.code == 200){
                         $(".container .Result").css('display', 'block');
 					    $(".container .Result").html(
-						'<div class="alert alert-info">Link 链接<br><input type="text" value="'+ result.src +'" id="imgurl" size="53"><br><br><a href="'+ result.src + '" target="_Blank"><button type="button" class="btn btn-primary">Open in New Tab 在新窗口打开</button></a> &nbsp;<button onclick="CopyUrl()" class="btn btn-primary">Copy Url 复制链接</button><br><br><img src = '+ result.src + '/></div>');
+						'<div class="alert alert-info">Link 链接<br><input type="text" value="'+ result.src +'" id="imgurl" size="53"><br><br><a href="'+ result.src + '" target="_Blank"><button type="button" class="btn btn-primary">Open in New Tab 在新窗口打开</button></a> &nbsp;<button onclick="CopyUrl()" class="btn btn-primary">Copy Url 复制链接</button><br></div>');
+						//<br><img src = '+ result.src + '/>
 						$(".container .ewm").css('display', 'block');
                     }
                     else{
